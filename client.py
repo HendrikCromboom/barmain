@@ -26,7 +26,11 @@ def query(prompt):
         "stream" : False
     }
     response = requests.post(url, payload)
-    return response.json()["response"]
+    data = response.json()
+    if "response" in data:
+        return data["response"]
+    else:
+        raise ValueError("Error")
 
 if __name__ == "__main__":
 
