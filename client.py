@@ -1,6 +1,7 @@
 import asyncio
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
+import requests
 
 async def main():
     server_params = StdioServerParameters(
@@ -16,6 +17,16 @@ async def main():
             print("Available tools:")
             for tool in tools_result.tools:
                 print(f"  - {tool.name}: {tool.description}")
+
+def query(prompt):
+    url = "test"
+    payload = {
+        "model" : "tinyllama",
+        "prompt" : prompt,
+        "stream" : False
+    }
+    response = requests.post(url, payload)
+    return response.json()["response"]
 
 if __name__ == "__main__":
 
