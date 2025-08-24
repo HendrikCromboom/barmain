@@ -16,32 +16,37 @@ def something(example: str) -> str:
     return example + " something something"
 @mcp.tool()
 def get_drinks() -> str: #TODO: Wrap or obfuscate
+    intro = "The available base drinks with their ingredients are as follows:"
+    return qa_json_to_tool_str("data", "drinks.json", intro, "drinks", "ingredients")
+
+def qa_json_to_tool_str(directory: str, filename: str, intro: str, question_name: str, answer_name: str ) -> str:
     try:
-        path = os.path.join(os.path.dirname(__file__), "data", "drinks.json")
+        path = os.path.join(os.path.dirname(__file__), directory, filename)
         with open(path, "r") as f:
             data = json.load(f)
-        drinks = "The available base drinks with their ingredients are as follows:\n\n"
+        string  = intro + "\n\n"
         if isinstance(data, list):
             for i, item in enumerate(data, 1):
                 if isinstance(item, dict):
-                    name = item.get("name", "Unknown drink")
-                    ingredients = item.get("ingredients", "Unknown ingredients")
+                    question = item.get(question_name, "Unknown " + question_name)
+                    answer = item.get(answer_name, "Unknown " + answer_name)
                 else:
                     question = f"Item {i}"
                     answer = str(item)
 
-                drinks += f"Q{i}: {name}\n"
-                drinks += f"A{i}: {ingredients}\n\n"
+                string += f"Q{i}: {question}\n"
+                string += f"A{i}: {answer}\n\n"
         else:
-            drinks += f"Knowledge base content: {json.dumps(data, indent=2)}\n\n"
+            string += f"Knowledge base content: {json.dumps(data, indent=2)}\n\n"
 
-        return drinks
+        return string
     except FileNotFoundError:
         return "Error: Knowledge base file not found"
     except json.JSONDecodeError:
         return "Error: Invalid JSON in knowledge base file"
     except Exception as e:
         return f"Error: {str(e)}"
+
 
 if __name__ == "__main__":
 
