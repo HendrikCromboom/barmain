@@ -24,14 +24,14 @@ def get_drinks() -> str: #TODO: Wrap or obfuscate
         if isinstance(data, list):
             for i, item in enumerate(data, 1):
                 if isinstance(item, dict):
-                    question = item.get("question", "Unknown question")
-                    answer = item.get("answer", "Unknown answer")
+                    name = item.get("name", "Unknown drink")
+                    ingredients = item.get("ingredients", "Unknown ingredients")
                 else:
                     question = f"Item {i}"
                     answer = str(item)
 
-                drinks += f"Q{i}: {question}\n"
-                drinks += f"A{i}: {answer}\n\n"
+                drinks += f"Q{i}: {name}\n"
+                drinks += f"A{i}: {ingredients}\n\n"
         else:
             drinks += f"Knowledge base content: {json.dumps(data, indent=2)}\n\n"
 
