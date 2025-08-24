@@ -1,0 +1,53 @@
+[
+  {
+    "name": "Margarita",
+    "ingredients": [
+      "2 oz Tequila",
+      "1 oz Lime juice",
+      "1 oz Triple sec",
+      "Salt (for rim)",
+      "Lime wedge (for garnish)"
+    ]
+  },
+  {
+    "name": "Mojito",
+    "ingredients": [
+      "2 oz White rum",
+      "1 oz Lime juice",
+      "2 tsp Sugar",
+      "6 Mint leaves",
+      "Soda water",
+      "Ice"
+    ]
+  },
+  {
+    "name": "Old Fashioned",
+    "ingredients": [
+      "2 oz Bourbon or Rye whiskey",
+      "1 Sugar cube",
+      "2 dashes Angostura bitters",
+      "Orange twist",
+      "Ice"
+    ]
+  },
+  {
+    "name": "Cosmopolitan",
+    "ingredients": [
+      "1.5 oz Vodka",
+      "1 oz Cranberry juice",
+      "0.5 oz Triple sec",
+      "0.5 oz Lime juice",
+      "Lime twist (for garnish)"
+    ]
+  },
+  {
+    "name": "Negroni",
+    "ingredients": [
+      "1 oz Gin",
+      "1 oz Campari",
+      "1 oz Sweet vermouth",
+      "Orange peel (for garnish)",
+      "Ice"
+    ]
+  }
+ ]

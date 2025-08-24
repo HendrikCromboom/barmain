@@ -25,12 +25,28 @@ def query(prompt):
         "prompt" : prompt,
         "stream" : False
     }
-    response = requests.post(url, payload)
-    data = response.json()
-    if "response" in data:
-        return data["response"]
-    else:
-        raise ValueError("Error")
+    try: #TODO: Wrap or obfuscate this: Hendrik 24/08/25
+        response = requests.post(url, json=payload, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        if "response" in data:
+            return data["response"]
+        else:
+            raise ValueError("Error")
+    except requests.exceptions.ConnectionError:
+        return "Could not connect to Ollama. Is it running on the correct port?"
+
+    except requests.exceptions.Timeout:
+        return "Request to Ollama timed out. Try increasing the timeout or decrease system load."
+
+    except requests.exceptions.HTTPError as http_err:
+        return f"HTTP error occurred: {http_err}"
+
+    except ValueError as val_err:
+        return f"Value error: {val_err}"
+
+    except Exception as err:
+        return f"An unexpected error occurred: {err}"
 
 if __name__ == "__main__":
 
