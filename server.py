@@ -5,19 +5,16 @@ import json
 
 load_dotenv()
 
-runtime_env = os.getenv('RUNTIME_ENV')
-
 mcp = FastMCP(
     name = "barmAIn",
     stateless_http = True
 )
 @mcp.tool()
-def something(example: str) -> str:
-    return example + " something something"
-@mcp.tool()
-def get_drinks() -> str: #TODO: Wrap or obfuscate
+def get_drinks() -> str:
+    """Returns a list of drinks that you can suggest where name is the name of the cocktail and ingredients are its
+    ingredients"""
     intro = "The available base drinks with their ingredients are as follows:"
-    return qa_json_to_tool_str("data", "drinks.json", intro, "drinks", "ingredients")
+    return qa_json_to_tool_str("data", "drinks.json", intro, "name", "ingredients")
 
 def qa_json_to_tool_str(directory: str, filename: str, intro: str, question_name: str, answer_name: str ) -> str:
     try:
@@ -34,8 +31,8 @@ def qa_json_to_tool_str(directory: str, filename: str, intro: str, question_name
                     question = f"Item {i}"
                     answer = str(item)
 
-                string += f"Q{i}: {question}\n"
-                string += f"A{i}: {answer}\n\n"
+                string += f"Drink{i}: {question}\n"
+                string += f"Ingredients{i}: {answer}\n\n"
         else:
             string += f"Knowledge base content: {json.dumps(data, indent=2)}\n\n"
 
@@ -50,12 +47,6 @@ def qa_json_to_tool_str(directory: str, filename: str, intro: str, question_name
 
 if __name__ == "__main__":
 
-    if runtime_env == "test":
-        print("Running server with stdio transport")
-        mcp.run(transport="stdio")
-    elif runtime_env == "docker":
-        print("Running Local MCP Server with Streamable HTTP transport")
-        mcp.run(transport="streamable-http")
-    else:
-        raise ValueError(f"Unknown env: {runtime_env}")
+    mcp.run(transport="stdio")
+
 
