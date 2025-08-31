@@ -15,6 +15,12 @@ def get_drinks() -> str:
     ingredients"""
     intro = "The available base drinks with their ingredients are as follows:"
     return qa_json_to_tool_str("data", "drinks.json", intro, "name", "ingredients")
+@mcp.tool()
+def get_flavors() -> str:
+    """Returns a list of drinks that you can suggest where name is the name of the cocktail and ingredients are its
+    ingredients"""
+    intro = "The available flavors for ingredients are as follows:"
+    return qa_json_to_tool_str("data", "flavors.json", intro, "ingredient", "flavors")
 
 def qa_json_to_tool_str(directory: str, filename: str, intro: str, question_name: str, answer_name: str ) -> str:
     try:

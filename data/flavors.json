@@ -1,0 +1,35 @@
+[
+  {
+    "ingredient": "Tequila",
+    "flavors": [
+      "Earthy",
+      "Spicy",
+      "Slightly sweet"
+    ]
+  },
+  {
+    "ingredient": "Lime juice",
+    "flavors": [
+      "Sour",
+      "Fresh",
+      "Slightly sweet"
+    ]
+  },
+  {
+    "ingredient": "Triple Sec",
+    "flavors": [
+      "Tangy",
+      "Orange",
+      "Sweet",
+      "Citrusy"
+    ]
+  },
+  {
+    "ingredient": "Mint",
+    "flavors": [
+      "Herby",
+      "Fresh",
+      "Minty"
+    ]
+  }
+]
